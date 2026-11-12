@@ -4,6 +4,30 @@
 [ext_resource type="PackedScene" uid="uid://by63v4f0dglrs" path="res://assets/models/left_hand.glb" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://bs1obxgybyogy" path="res://assets/models/right_hand.glb" id="3_1bvp3"]
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_edqvp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_edqvp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2u2t7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4p2t6"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_edqvp"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_edqvp"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4p2t6"]
+top_radius = 0.14941406
+bottom_radius = 0.14941406
+height = 5.301758
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_h2yge"]
+top_radius = 0.14941406
+bottom_radius = 0.14941406
+height = 3.7834473
+
+[sub_resource type="SphereMesh" id="SphereMesh_edqvp"]
+
 [node name="Node3D" type="Node3D" unique_id=443017324]
 script = ExtResource("1_ig7tw")
 
@@ -17,7 +41,7 @@ tracker = &"left_hand"
 [node name="HandLeftRoot" type="Node3D" parent="XROrigin3D/LeftController" unique_id=892871244]
 
 [node name="left_hand" parent="XROrigin3D/LeftController/HandLeftRoot" unique_id=1561258211 instance=ExtResource("2_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 1, 0)
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D" unique_id=1346823306]
 tracker = &"right_hand"
@@ -25,7 +49,7 @@ tracker = &"right_hand"
 [node name="HandRightRoot" type="Node3D" parent="XROrigin3D/RightController" unique_id=1907017743]
 
 [node name="right_hand" parent="XROrigin3D/RightController/HandRightRoot" unique_id=1367594186 instance=ExtResource("3_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.2, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.2, 1, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1927492126]
 
@@ -33,3 +57,53 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.2,
 offset_right = 8.0
 offset_bottom = 8.0
 text = "Enter VR"
+
+[node name="Level" type="Node3D" parent="." unique_id=1823548343]
+
+[node name="PlaneMesh" type="MeshInstance3D" parent="Level" unique_id=471176098]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+mesh = SubResource("PlaneMesh_edqvp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Level/PlaneMesh" unique_id=2034709983]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/PlaneMesh/StaticBody3D" unique_id=2002762632]
+transform = Transform3D(20, 0, 0, 0, 0.1, 0, 0, 0, 20, 0, 0, 0)
+shape = SubResource("BoxShape3D_edqvp")
+
+[node name="BoxMesh" type="MeshInstance3D" parent="Level" unique_id=1068046008]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8850503, 1.083477, -3.022531)
+mesh = SubResource("BoxMesh_2u2t7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Level/BoxMesh" unique_id=826900047]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/BoxMesh/StaticBody3D" unique_id=1270759078]
+shape = SubResource("BoxShape3D_4p2t6")
+
+[node name="CylinderMesh" type="MeshInstance3D" parent="Level" unique_id=107465413]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.348324, 0.91669244, -2.4880507)
+mesh = SubResource("CylinderMesh_edqvp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Level/CylinderMesh" unique_id=510956324]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/CylinderMesh/StaticBody3D" unique_id=1223935398]
+shape = SubResource("CylinderShape3D_edqvp")
+
+[node name="GateLeft" type="MeshInstance3D" parent="Level" unique_id=1149758309]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.66, 2.5, -17)
+mesh = SubResource("CylinderMesh_4p2t6")
+
+[node name="GateRight" type="MeshInstance3D" parent="Level" unique_id=139047805]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.66, 2.5, -17)
+mesh = SubResource("CylinderMesh_4p2t6")
+
+[node name="GateUp" type="MeshInstance3D" parent="Level" unique_id=234613247]
+transform = Transform3D(-4.371139e-08, -2, 0, 1, -8.742278e-08, 0, 0, 0, 1, 0.017822266, 5.1224704, -17)
+mesh = SubResource("CylinderMesh_h2yge")
+
+[node name="Ball" type="MeshInstance3D" parent="Level" unique_id=1171652212]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7243412, 1.4581087, -18.5085)
+mesh = SubResource("SphereMesh_edqvp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level" unique_id=782325950]
+transform = Transform3D(1, 0, 0, 0, 0.658943, 0.75219285, 0, -0.75219285, 0.658943, 0, 13.895725, 13.890628)
