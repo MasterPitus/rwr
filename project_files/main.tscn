@@ -1,10 +1,8 @@
 [gd_scene format=3 uid="uid://dyp4c7lsh2scl"]
 
 [ext_resource type="Script" uid="uid://dsk0bcyeonm0x" path="res://main.gd" id="1_ig7tw"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_edqvp"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_4p2t6"]
+[ext_resource type="PackedScene" uid="uid://by63v4f0dglrs" path="res://assets/models/left_hand.glb" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bs1obxgybyogy" path="res://assets/models/right_hand.glb" id="3_1bvp3"]
 
 [node name="Node3D" type="Node3D" unique_id=443017324]
 script = ExtResource("1_ig7tw")
@@ -16,16 +14,18 @@ script = ExtResource("1_ig7tw")
 [node name="LeftController" type="XRController3D" parent="XROrigin3D" unique_id=1960826912]
 tracker = &"left_hand"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftController" unique_id=1340666633]
-custom_aabb = AABB(0.1, 0.1, 0.1, 0.1, 0.1, 0.1)
-mesh = SubResource("BoxMesh_edqvp")
+[node name="HandLeftRoot" type="Node3D" parent="XROrigin3D/LeftController" unique_id=892871244]
+
+[node name="left_hand" parent="XROrigin3D/LeftController/HandLeftRoot" unique_id=1561258211 instance=ExtResource("2_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D" unique_id=1346823306]
 tracker = &"right_hand"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightController" unique_id=970829946]
-custom_aabb = AABB(0.1, 0.1, 0.1, 0.1, 0.1, 0.1)
-mesh = SubResource("BoxMesh_4p2t6")
+[node name="HandRightRoot" type="Node3D" parent="XROrigin3D/RightController" unique_id=1907017743]
+
+[node name="right_hand" parent="XROrigin3D/RightController/HandRightRoot" unique_id=1367594186 instance=ExtResource("3_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.2, 0, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1927492126]
 
